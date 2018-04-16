@@ -18,21 +18,23 @@
  */
 package org.apache.sling.jcr.contentparser.impl;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.jackrabbit.util.ISO8601;
+import org.apache.sling.jcr.contentparser.ParseException;
+import org.apache.sling.jcr.contentparser.ParserOptions;
+
 import java.lang.reflect.Array;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-
+import java.util.TimeZone;
 import javax.json.JsonObject;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.jackrabbit.util.ISO8601;
-import org.apache.sling.jcr.contentparser.ParseException;
-import org.apache.sling.jcr.contentparser.ParserOptions;
 
 /**
  * Helper parsing logic based on parser options.
@@ -45,12 +47,12 @@ class ParserHelper {
     static final Locale DATE_FORMAT_LOCALE = Locale.US;
 
     private final ParserOptions options;
-    private final DateFormat calendarFormat;
+    private final DateTimeFormatter calendarFormat;
 
     public ParserHelper(ParserOptions options) {
         this.options = options;
         if (options.isDetectCalendarValues()) {
-            this.calendarFormat = new SimpleDateFormat(ECMA_DATE_FORMAT, DATE_FORMAT_LOCALE);
+            this.calendarFormat = DateTimeFormatter.ofPattern(ECMA_DATE_FORMAT, DATE_FORMAT_LOCALE);
         }
         else {
             this.calendarFormat = null;
@@ -76,12 +78,12 @@ class ParserHelper {
             // 2nd try: parse with ECMA date format which is used by Sling GET servlet
             calendar = Calendar.getInstance();
             try {
-                synchronized (calendarFormat) {
-                    Date date = calendarFormat.parse(value);
-                    calendar.setTime(date);
-                }
+                final OffsetDateTime offsetDateTime = OffsetDateTime.parse(value, calendarFormat);
+                final Instant instant = offsetDateTime.toInstant();
+                calendar.setTime(Date.from(instant));
+                calendar.setTimeZone(TimeZone.getTimeZone(offsetDateTime.getOffset()));
                 return calendar;
-            } catch (java.text.ParseException ex) {
+            } catch (DateTimeParseException ex) {
                 // ignore
             }
         }

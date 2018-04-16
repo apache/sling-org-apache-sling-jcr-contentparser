@@ -82,8 +82,6 @@ public class ParserHelperTest {
         Calendar value = underTest.tryParseCalendar("Tue Apr 22 2014 15:11:24 GMT+0200");
         assertNotNull(value);
 
-        value.setTimeZone(TimeZone.getTimeZone("GMT+2"));
-
         assertEquals(2014, value.get(Calendar.YEAR));
         assertEquals(4, value.get(Calendar.MONTH) + 1);
         assertEquals(22, value.get(Calendar.DAY_OF_MONTH));
