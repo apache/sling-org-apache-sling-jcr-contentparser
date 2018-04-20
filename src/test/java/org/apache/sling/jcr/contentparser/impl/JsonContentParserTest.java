@@ -119,8 +119,6 @@ public class JsonContentParserTest {
         Calendar calendar = (Calendar) props.get("dateISO8601String");
         assertNotNull(calendar);
 
-        calendar.setTimeZone(TimeZone.getTimeZone("GMT+2"));
-
         assertEquals(2014, calendar.get(Calendar.YEAR));
         assertEquals(4, calendar.get(Calendar.MONTH) + 1);
         assertEquals(22, calendar.get(Calendar.DAY_OF_MONTH));
