@@ -20,6 +20,9 @@ package org.apache.sling.jcr.contentparser;
 
 /**
  * Feature flags for parsing JSON files.
+ *
+ * @deprecated since version 1.2.8 of the {@code org.apache.sling.jcr.contentparser} bundle;
+ * see <a href="https://github.com/apache/sling-org-apache-sling-contentparser-api">{@code org.apache.sling.contentparser.api}</a>
  */
 public enum JsonParserFeature {
 

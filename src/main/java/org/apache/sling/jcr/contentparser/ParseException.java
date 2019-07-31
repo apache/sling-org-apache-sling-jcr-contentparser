@@ -22,6 +22,9 @@ import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * Parsing exception.
+ *
+ * @deprecated since version 1.2.8 of the {@code org.apache.sling.jcr.contentparser} bundle;
+ * see <a href="https://github.com/apache/sling-org-apache-sling-contentparser-api">{@code org.apache.sling.contentparser.api}</a>
  */
 @ProviderType
 public final class ParseException extends RuntimeException {

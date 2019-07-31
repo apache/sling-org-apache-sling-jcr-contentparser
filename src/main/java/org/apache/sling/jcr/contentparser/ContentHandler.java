@@ -26,7 +26,11 @@ import org.osgi.annotation.versioning.ConsumerType;
  * Handler that gets notified while parsing content with {@link ContentParser}.
  * The resources are always reported in order of their paths as found in the content fragment.
  * Parents are always reported before their children.
+ *
+ * @deprecated since version 1.2.8 of the {@code org.apache.sling.jcr.contentparser} bundle;
+ * see <a href="https://github.com/apache/sling-org-apache-sling-contentparser-api">{@code org.apache.sling.contentparser.api}</a>
  */
+@Deprecated
 @ConsumerType
 public interface ContentHandler {
 
