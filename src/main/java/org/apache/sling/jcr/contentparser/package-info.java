@@ -19,5 +19,6 @@
 /**
  * Parser for repository content serialized e.g. as JSON or JCR XML.
  */
+@Deprecated
 @org.osgi.annotation.versioning.Version("1.3.0")
 package org.apache.sling.jcr.contentparser;
