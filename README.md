@@ -9,4 +9,6 @@ This module is part of the [Apache Sling](https://sling.apache.org) project.
 Parser for JCR repository content stored in files (e.g. JSON, FileVault XML).
 
 ### Note
-This module has been deprecated in favour of https://github.com/apache/sling-org-apache-sling-contentparser-api.
+This module has been deprecated in favour of [Apache Sling Content Parser API](https://github.com/apache/sling-org-apache-sling-contentparser-api).
+
+For reference or potential bugfix releases please use the [maintenance](https://github.com/apache/sling-org-apache-sling-jcr-contentparser/tree/maintenance) branch.
